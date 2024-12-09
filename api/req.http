@@ -1,0 +1,47 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=GoLand
+
+###
+
+###
+# @no-cookie-jar
+POST http://localhost:8080/api/user/login
+Content-Type:application/json
+
+{
+  "username": "admin001",
+  "password": "12345678"
+}
+
+###
+GET http://localhost:8080/api/vocabulary/words
+Cookie: token-jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhbmd1bGFyLWNsaWVudCIsImV4cCI6MTczMzQ5Nzc5OSwiaWF0IjoxNzMzNDk3NDk5LCJpc3MiOiJnby1sYW5nLXNlcnZlciIsInJvbGVzIjpbIkFETUlOIiwiVklQX1VTRVIiLCJGUkVFX1VTRVIiXSwic3ViIjoiYWRtaW4wMDAifQ.7c4rD6dHtECJj5XtTZAjZGPDDVIDdoYTGytCZ9PCstE; Path=/; HttpOnly; SameSite=Strict
+
+###
+POST http://localhost:8080/api/vocabulary/words
+Content-Type: application/json
+Cookie: token-jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhbmd1bGFyLWNsaWVudCIsImV4cCI6MTczMzM5NDIyNiwiaWF0IjoxNzMzMzkzOTI2LCJpc3MiOiJnby1sYW5nLXNlcnZlciIsInJvbGVzIjpbIkFETUlOIiwiVklQX1VTRVIiLCJGUkVFX1VTRVIiXSwic3ViIjoiYWRtaW4wMDAifQ.Mm5RASOwhNrEnvo_2tNUXV1IKGX3gYHXFqgx6VLu3Bw; Path=/; Max-Age=3600; HttpOnly
+
+{
+  "word": "table",
+  "meaning_vn": "cái bàn",
+  "meaning_de": "der Tisch",
+  "word_type_id": 1
+}
+
+###
+GET http://localhost:8080/api/vocabulary/search?s=tabl
+
+###
+GET http://localhost:8080/connections
+
+###
+WEBSOCKET ws://localhost:8080/ws
+Content-Type: application/json
+Cookie: token-jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhbmd1bGFyLWNsaWVudCIsImV4cCI6MTczMzUyNzUzNCwiaWF0IjoxNzMzNTI3MjM0LCJpc3MiOiJnby1sYW5nLXNlcnZlciIsInJvbGVzIjpbIkFETUlOIiwiVklQX1VTRVIiLCJGUkVFX1VTRVIiXSwic3ViIjoiYWRtaW4wMDAifQ.7YXPpHBjpU_rzZubFFKMVhbh_xJEEwofAyPeaZBSVEE; Path=/; HttpOnly; SameSite=Strict
+
+===
+{
+  "message": "abc"
+}

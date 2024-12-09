@@ -1,0 +1,4 @@
+### Connect to Websocket
+WEBSOCKET ws://localhost:8080/ws?username=admin000
+Content-Type:application/json
+Cookie: token-jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOiJhbmd1bGFyLWNsaWVudCIsImV4cCI6MTczMzUyNzY4NSwiaWF0IjoxNzMzNTI3Mzg1LCJpc3MiOiJnby1sYW5nLXNlcnZlciIsInJvbGVzIjpudWxsLCJzdWIiOiJhZG1pbjAwMSJ9.1Y2jedP-z_Lm4iqNkcYf4yMb9TI82kzS5fT85LmQ7vg; Path=/; HttpOnly; SameSite=Strict
