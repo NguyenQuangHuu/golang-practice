@@ -51,11 +51,12 @@ func main() {
 	router := gin.Default()
 	router.Use(middleware.CORSMiddleware())
 	wordHandler := router.Group("/api/vocabulary")
-	wordHandler.GET("/search", wordHandle.FindByWord)
+	wordHandler.GET("/words/s", wordHandle.FindByWord)
+	wordHandler.POST("/words", wordHandle.AddWord)
 	wordHandler.Use(middleware.RequireAuthentication)
 	wordHandler.GET("/words", middleware.RoleRequired("ADMIN", "VIP_USER"), wordHandle.GetAllWords)
 	wordHandler.GET("/words/:id", wordHandle.GetWordByID)
-	wordHandler.POST("/words", middleware.RoleRequired("ADMIN"), wordHandle.AddWord)
+
 	wordHandler.PUT("/words/:id", wordHandle.UpdateWordByID)
 
 	userHandler := router.Group("/api/user")

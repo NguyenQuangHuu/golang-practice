@@ -87,7 +87,7 @@ func (w *WordHandle) UpdateWordByID(c *gin.Context) {
 }
 
 func (w *WordHandle) FindByWord(c *gin.Context) {
-	searchWord := c.Query("s")
+	searchWord := c.DefaultQuery("query", "")
 	result, err := w.service.FindByWord(searchWord)
 	if err != nil {
 		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})

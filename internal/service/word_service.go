@@ -7,17 +7,17 @@ import (
 
 type IWordService interface {
 	GetWordByID(id int) (*model.WordModel, error)
-	GetAllWords() ([]*model.WordModel, error)
+	GetAllWords() ([]*model.Word, error)
 	AddWord(word *model.Word) error
 	UpdateWordByID(word *model.Word) error
-	FindByWord(word string) ([]*model.WordModel, error)
+	FindByWord(word string) ([]*model.Word, error)
 }
 
 type WordService struct {
 	wordRepository repository.IWordRepository
 }
 
-func (w *WordService) FindByWord(word string) ([]*model.WordModel, error) {
+func (w *WordService) FindByWord(word string) ([]*model.Word, error) {
 	//TODO implement me
 	result, err := w.wordRepository.FindByWord(word)
 	if err != nil {
@@ -41,7 +41,7 @@ func (w *WordService) GetWordByID(id int) (*model.WordModel, error) {
 	return result, nil
 }
 
-func (w *WordService) GetAllWords() ([]*model.WordModel, error) {
+func (w *WordService) GetAllWords() ([]*model.Word, error) {
 	result, err := w.wordRepository.GetAllWords()
 	if err != nil {
 		return nil, err
