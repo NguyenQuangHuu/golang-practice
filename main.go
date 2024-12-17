@@ -63,6 +63,7 @@ func main() {
 	userHandler.POST("/register", userHandle.Register)
 	userHandler.GET("/logout", userHandle.Logout)
 	router.GET("/ws", handler.HandleWebsocket)
+	router.GET("/online-client", handler.OnlineClient)
 	err := router.Run()
 	if err != nil {
 		return

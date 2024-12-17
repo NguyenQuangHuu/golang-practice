@@ -82,3 +82,11 @@ func (u *UserHandler) Logout(c *gin.Context) {
 	c.SetCookie("token-jwt", "", -1, "/", "", false, true)
 	c.IndentedJSON(http.StatusOK, gin.H{"message": "logout successfully"})
 }
+
+func getUsernameFromToken(c *gin.Context) string {
+	username, err := helpers.GetUsername(c)
+	if err != nil {
+		c.IndentedJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+	}
+	return username
+}
