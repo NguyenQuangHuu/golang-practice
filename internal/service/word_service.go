@@ -6,7 +6,7 @@ import (
 )
 
 type IWordService interface {
-	GetWordByID(id int) (*model.WordModel, error)
+	GetWordByID(id int) (*model.Word, error)
 	GetAllWords() ([]*model.Word, error)
 	AddWord(word *model.Word) error
 	UpdateWordByID(word *model.Word) error
@@ -33,7 +33,7 @@ func NewWordService(wordRepository repository.IWordRepository) IWordService {
 	return &WordService{wordRepository: wordRepository}
 }
 
-func (w *WordService) GetWordByID(id int) (*model.WordModel, error) {
+func (w *WordService) GetWordByID(id int) (*model.Word, error) {
 	result, err := w.wordRepository.GetWordByID(id)
 	if err != nil {
 		return nil, err

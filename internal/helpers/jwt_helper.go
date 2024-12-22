@@ -20,7 +20,7 @@ func GenerateToken(user *model.User, expỉredTime time.Duration) (string, error
 		"aud":   "angular-client",
 		"iat":   time.Now().Unix(),
 		"exp":   time.Now().Add(expỉredTime).Unix(),
-		"roles": user.Role,
+		"roles": user.Roles,
 	}
 	tokenGenerated := jwt.NewWithClaims(jwt.SigningMethodHS256, claim)
 	signedToken, err := tokenGenerated.SignedString(SecretKey)

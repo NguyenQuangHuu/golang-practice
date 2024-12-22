@@ -39,7 +39,7 @@ func (r *UserRepository) GetUserByUsername(username string) (*model.User, error)
 		if err != nil {
 			return nil, err
 		}
-		user.Role = append(user.Role, role)
+		user.Roles = append(user.Roles, role)
 	}
 	return &user, nil
 }

@@ -5,9 +5,9 @@ import (
 	"database/sql"
 )
 
-// IWordRepository Repository for db layer
+// IWordRepository Repository for communicate with db layer
 type IWordRepository interface {
-	GetWordByID(id int) (*model.WordModel, error)
+	GetWordByID(id int) (*model.Word, error)
 	GetAllWords() ([]*model.Word, error)
 	AddWord(word *model.Word) error
 	UpdateWordByID(word *model.Word) error
@@ -18,16 +18,19 @@ type WordRepository struct {
 	db *sql.DB
 }
 
+// NewWordRepository constructor
 func NewWordRepository(db *sql.DB) *WordRepository {
 	return &WordRepository{db}
 }
 
-func (w *WordRepository) GetWordByID(id int) (*model.WordModel, error) {
-	var word model.WordModel
-	result := w.db.QueryRow("select wi.id,wi.word,wi.meaning_vn,wi.meaning_de,wt.name "+
+// GetWordByID function use to get word by id
+func (w *WordRepository) GetWordByID(id int) (*model.Word, error) {
+	var word model.Word
+	result := w.db.QueryRow("select wi.id,wi.word,wi.meaning_vn,wi.meaning_de,wt.id,wt.name,wt.description "+
 		"from word_information as wi"+
 		" inner join word_type as wt on wi.word_type_id = wt.id where wi.id = $1", id)
-	if err := result.Scan(&word.ID, &word.Word, &word.MeaningVN, &word.MeaningDE, &word.WordTypeName); err != nil {
+	var wordTypeID int
+	if err := result.Scan(&word.ID, &word.Word, &word.MeaningVN, &word.MeaningDE, &wordTypeID, &word.WordType.Name, &word.WordType.Description); err != nil {
 		return nil, err
 	}
 	return &word, nil
@@ -73,9 +76,6 @@ func (w *WordRepository) UpdateWordByID(word *model.Word) error {
 }
 
 func (w *WordRepository) FindByWord(word string) ([]*model.Word, error) {
-	//var query = "select wi.id,wi.word,wi.meaning_vn,wi.meaning_de,wt.name " +
-	//	"from word_information as wi " +
-	//	"inner join word_type as wt on wi.word_type_id = wt.id where wi.word like $1"
 	var query = "" +
 		"select word_information.id,word_information.word,word_information.meaning_vn,word_information.meaning_de," +
 		"word_type.id,word_type.name,word_type.description from word_information inner join word_type on word_information.word_type_id = word_type.id where word like $1"
