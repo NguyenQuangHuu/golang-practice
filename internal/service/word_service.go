@@ -2,7 +2,7 @@ package service
 
 import (
 	"awesomeProject/internal/model"
-	"awesomeProject/internal/repository"
+	vocabularies2 "awesomeProject/internal/repository"
 )
 
 type IWordService interface {
@@ -14,7 +14,7 @@ type IWordService interface {
 }
 
 type WordService struct {
-	wordRepository repository.IWordRepository
+	wordRepository vocabularies2.IWordRepository
 }
 
 func (w *WordService) FindByWord(word string) ([]*model.Word, error) {
@@ -29,7 +29,7 @@ func (w *WordService) FindByWord(word string) ([]*model.Word, error) {
 	return nil, nil
 }
 
-func NewWordService(wordRepository repository.IWordRepository) IWordService {
+func NewWordService(wordRepository vocabularies2.IWordRepository) IWordService {
 	return &WordService{wordRepository: wordRepository}
 }
 
